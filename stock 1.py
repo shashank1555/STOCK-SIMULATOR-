@@ -34,9 +34,7 @@ last_prediction_dir = {}
 
 TICK_SIGMA = 0.004
 
-# ============================
-# PRELOAD REALISTIC HISTORY
-# ============================
+
 def preload_history():
     for s, base in INITIAL.items():
         last = base * 0.97
@@ -55,9 +53,7 @@ def preload_history():
 
 preload_history()
 
-# ============================
-# PREDICTION SYSTEM
-# ============================
+
 def predict(stock):
     h = price_history[stock]
     if len(h) < 4:
@@ -80,9 +76,7 @@ def predict(stock):
 
     return predicted
 
-# ============================
-# MARKET UPDATE (NO INSIDER TIP)
-# ============================
+
 def update_market():
     for s in stocks:
         open_price = stocks[s]
@@ -113,9 +107,7 @@ def update_market():
         old_prices[s] = open_price
         stocks[s] = price
 
-# ============================
-# SHOW MARKET
-# ============================
+
 def show_market():
     update_market()
     print("\n--- MARKET ---")
@@ -128,9 +120,7 @@ def show_market():
         sign = "+" if pct > 0 else ""
         print(f"{YELLOW}{s}{RESET}: ${now}  {col}({sign}{round(pct, 2)}%){RESET}")
 
-# ============================
-# BUY
-# ============================
+
 def buy():
     global balance
 
@@ -176,9 +166,7 @@ def buy():
 
     print(GREEN + f"Bought {q} of {s}" + RESET)
 
-# ============================
-# SELL
-# ============================
+
 def sell():
     global balance
     if not portfolio:
@@ -209,9 +197,7 @@ def sell():
 
     print(GREEN + f"Sold {q} of {s}" + RESET)
 
-# ============================
-# PORTFOLIO
-# ============================
+
 def show_portfolio():
     print("\n--- PORTFOLIO ---")
     print(f"Balance: ${round(balance, 2)}\n")
@@ -237,9 +223,7 @@ def show_portfolio():
         print(col + f" P/L: {round(prof, 2)}" + RESET)
         print()
 
-# ============================
-# CANDLECHART
-# ============================
+
 def plot_candle(s):
     if plt is None:
         print("Install matplotlib.")
@@ -260,9 +244,7 @@ def plot_candle(s):
     ax.grid(True)
     plt.show()
 
-# ============================
-# MAIN LOOP
-# ============================
+
 def main():
     while True:
         print("\n1. View Market")
@@ -293,3 +275,4 @@ def main():
             print("Invalid choice.")
 
 main()
+
